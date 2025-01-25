@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import { JsonWebToken } from "jsonwebtoken";
+import  jsonWebToken  from "jsonwebtoken";
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema({
@@ -24,7 +24,7 @@ const userSchema = new Schema({
         index: true,
         trim: true
     },
-    passwword: {
+    password: {
         type: String,
         required: [true, "password is required"]
     },
@@ -48,7 +48,7 @@ const userSchema = new Schema({
 
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next()
-    this.passwword = await bcrypt.hash(this.passwword, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
@@ -77,6 +77,8 @@ userSchema.methods.generateRefreshToken = async function () {
     {
         expiresIn: process.env.REFRESH_TOKEN_EXPIRY
     })
+
+    //
 }
 
 export const User = mongoose.model("User", userSchema)

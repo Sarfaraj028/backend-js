@@ -10,8 +10,8 @@ app.use(cors({
     credentials: true
 }))
 
-app.use(express.json({limit: "10kb"}))
-app.use(express.urlencoded({extended: true, limit: "10kb"}))
+app.use(express.json({limit: "20kb"}))
+app.use(express.urlencoded({extended: true, limit: "15kb"}))
 app.use(express.static("public")) // to serve statis files like pdf, images, videos, css
 app.use(cookieParser()) //to read cookies from users browser for crud opreration
 
